@@ -1,0 +1,8 @@
+.env
+.idea
+.coverage
+htmlcov/
+*.log
+*.sqlite3
+__pycache__/
+postgresql/data/
