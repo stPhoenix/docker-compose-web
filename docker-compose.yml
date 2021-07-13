@@ -1,16 +1,20 @@
-version: '3.3'
+version: '3.7'
 
 services: 
     backend:
-        build: backend
+        env_file:
+            - ./backend/.env
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+            target: production
         container_name: backend
         restart: unless-stopped
         working_dir: /backend
         volumes:
             - ./backend:/backend
-        command: pipenv run python manage.py runserver 0.0.0.0:9000
         expose:
-            - 9000
+            - 8000
         networks:
             - back-tier
 
@@ -50,7 +54,7 @@ services:
         ports:
             - "80:80"
             - "443:443"
-            - "9000:9000"
+            - "8000:8000"
             - "3000:3000"
         networks:
             - back-tier
